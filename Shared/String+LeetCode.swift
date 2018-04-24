@@ -8,18 +8,19 @@
 
 import Foundation
 
-extension String
-{
+extension String {
+
     subscript (i: Int) -> Character? {
-        if i > count(self) - 1 {
-            return .None
+        if i > self.characters.count - 1 {
+            return .none
         }
-        var index: Index = advance(self.startIndex, i)
+        let index: Index = self.characters.index(self.startIndex, offsetBy: i)
         return self[index]
     }
-    
+
     mutating func popBack() -> String {
-        self.removeAtIndex(advance(self.startIndex, count(self) - 1))
+        self.remove(at: self.characters.index(self.startIndex, offsetBy: self.characters.count - 1))
         return self
     }
+
 }

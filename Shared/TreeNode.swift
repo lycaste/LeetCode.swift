@@ -8,18 +8,18 @@
 
 import Foundation
 
-class TreeNode: DebugPrintable {
+class TreeNode: CustomDebugStringConvertible {
     var value = 0
     var leftNode: TreeNode?
     var rightNode: TreeNode?
-    
+
     init(_ value: Int = 0, _ left: TreeNode? = nil, _ right: TreeNode? = nil) {
         self.value = value
         self.leftNode = left
         self.rightNode = right
     }
-    
-    private func printTree(tree: TreeNode) -> String {
+
+    fileprivate func printTree(_ tree: TreeNode) -> String {
         var s = ""
         if let l = tree.leftNode {
             s = "l=\(printTree(l))"
@@ -27,17 +27,16 @@ class TreeNode: DebugPrintable {
         if let r = tree.rightNode {
             s = "\(s), r=\(printTree(r))"
         }
-        
+
         if s.isEmpty {
             return "\(tree.value):-"
         } else {
             return "\(tree.value):( \(s) )"
         }
     }
-    
+
     var debugDescription: String {
-        get {
-            return printTree(self)
-        }
+        return printTree(self)
     }
+
 }
